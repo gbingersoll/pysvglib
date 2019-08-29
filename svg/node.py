@@ -64,39 +64,51 @@ class Node(object):
 
     def add_title(self, title):
         self.append_child(TitleNode(title))
+        return self
 
     def append_child(self, node):
         self.children.append(node)
+        return self
 
     def insert_child(self, index, node):
         self.children.insert(index, node)
+        return self
 
     def delete_child(self, index):
         del self.children[index]
+        return self
 
     def append_class(self, cls):
         self.classes.append(cls)
+        return self
 
     def insert_class(self, index, cls):
         self.classes.insert(index, cls)
+        return self
 
     def remove_class(self, cls):
         self.classes.remove(cls)
+        return self
 
     def rotate(self, deg, center=None):
         self.transforms.append(Rotation(deg, center))
+        return self
 
     def scale(self, xy):
         self.transforms.append(Scale(xy))
+        return self
 
     def skew_x(self, val):
         self.transforms.append(SkewX(val))
+        return self
 
     def skew_y(self, val):
         self.transforms.append(SkewY(val))
+        return self
 
     def translate(self, xy):
         self.transforms.append(Translation(xy))
+        return self
 
     def to_string(self, indent=0):
         out_str = f"{' '*indent}<{self.tag}"
