@@ -19,6 +19,7 @@ class Path(Node):
         params.append('1' if sweep_ccw else '0')
         params += list(end_xy)
         self._append_command('A', relative, *params)
+        return self
 
     def c_bezier(self, ctrl1, ctrl2, end, relative=False):
         if ctrl1:
@@ -30,18 +31,23 @@ class Path(Node):
         coord_str += (f"{ctrl2[0]} {ctrl2[1]}, " +
                       f"{end[0]} {end[1]}")
         self._append_command(cmd, relative, coord_str)
+        return self
 
     def close(self):
         self._append_command('Z')
+        return self
 
     def h_line(self, x, relative=False):
         self._append_command('H', relative, x)
+        return self
 
     def line_to(self, xy, relative=False):
         self._append_command('L', relative, *(list(xy)))
+        return self
 
     def move_to(self, xy, relative=False):
         self._append_command('M', relative, *(list(xy)))
+        return self
 
     def q_bezier(self, ctrl, end, relative=False):
         if ctrl:
@@ -52,9 +58,11 @@ class Path(Node):
             cmd = 'T'
         coord_str += f"{end[0]} {end[1]}"
         self._append_command(cmd, relative, coord_str)
+        return self
 
     def v_line(self, y, relative=False):
         self._append_command('V', relative, y)
+        return self
 
     def _append_command(self, cmd, relative=False, *args):
         if relative:
