@@ -1,8 +1,11 @@
-import setuptools
+from setuptools import setup
 
-setuptools.setup(
+setup(
     name="svg",
     version="0.0.1",
     description="SVG drawing library",
-    packages=setuptools.find_packages(".", exclude=["test"]),
+    packages=['svg'],
+    extras_require={
+        'dev': ['pytest', 'pycodestyle']
+    }
 )
